@@ -46,7 +46,7 @@ const emptyMessage = document.getElementById("emptyMessage");
 const daftarBtn = document.getElementById("daftarBtn");
 const signupText = document.getElementById("signupText");
 
-fetch("http://localhost:3000/me", {
+fetch("https://tugas-ku-cot2.vercel.app/me", {
   method: "GET",
   headers: {
     Authorization: `Bearer ${localStorage.getItem("token")}`,

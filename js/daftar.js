@@ -7,7 +7,7 @@ form.addEventListener("submit", async (e) => {
   const password = document.getElementById("password").value.trim();
 
   try {
-    const res = await fetch("http://localhost:3000/daftar", {
+    const res = await fetch("https://tugas-ku-cot2.vercel.app/daftar", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -31,7 +31,7 @@ form.addEventListener("submit", async (e) => {
 
 async function handleCredentialResponse(response) {
   try {
-    const res = await fetch("http://localhost:3000/google-signup", {
+    const res = await fetch("https://tugas-ku-cot2.vercel.app/google-signup", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
