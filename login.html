@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1" name="viewport" />
+    <title>Login</title>
+
+    <!-- Tailwind -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Google Fonts & Icons -->
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- Google Sign-In -->
+    <meta
+      name="google-signin-client_id"
+      content="YOUR_CLIENT_ID.apps.googleusercontent.com"
+    />
+    <script src="https://accounts.google.com/gsi/client" async defer></script>
+    <script src="https://cdn.jsdelivr.net/npm/jwt-decode@3.1.2/build/jwt-decode.min.js"></script>
+
+    <style>
+      body {
+        font-family: "Inter", sans-serif;
+      }
+    </style>
+  </head>
+
+  <body>
+    <main
+      class="min-h-screen flex items-center justify-center px-6 py-10 bg-gray-100"
+    >
+      <section
+        class="w-full max-w-md bg-white rounded-3xl shadow-lg p-8 sm:p-10 flex flex-col gap-6"
+      >
+        <!-- Google Sign-In Button Container -->
+        <div
+          id="g_id_onload"
+          data-client_id="YOUR_CLIENT_ID.apps.googleusercontent.com"
+          data-callback="handleCredentialResponse"
+          data-auto_prompt="false"
+        ></div>
+
+        <div
+          class="g_id_signin"
+          data-type="standard"
+          data-shape="rectangular"
+          data-theme="outline"
+          data-text="sign_in_with"
+          data-size="large"
+          data-logo_alignment="left"
+        ></div>
+
+        <!-- OR separator -->
+        <div class="text-center text-sm text-gray-500">Atau masuk manual</div>
+
+        <!-- Manual Login Form -->
+        <form id="loginForm" class="flex flex-col gap-5">
+          <div class="flex flex-col">
+            <label
+              for="username"
+              class="text-sm font-semibold text-gray-700 mb-1"
+              >Nama</label
+            >
+            <input
+              id="username"
+              type="text"
+              placeholder="Masukkan nama"
+              class="rounded-xl border border-gray-300 px-4 py-3 text-base text-gray-800 placeholder-gray-400 focus:ring-2 focus:ring-blue-400 focus:border-transparent"
+              required
+            />
+          </div>
+
+          <div class="flex flex-col">
+            <label
+              for="password"
+              class="text-sm font-semibold text-gray-700 mb-1"
+              >Kata sandi</label
+            >
+            <input
+              id="password"
+              type="password"
+              placeholder="Masukkan kata sandi"
+              class="rounded-xl border border-gray-300 px-4 py-3 text-base text-gray-800 placeholder-gray-400 focus:ring-2 focus:ring-blue-400 focus:border-transparent"
+              required
+            />
+          </div>
+
+          <button
+            type="submit"
+            class="mt-2 py-3 rounded-xl bg-gradient-to-r from-teal-400 to-blue-500 text-white font-semibold text-lg shadow-lg hover:from-teal-500 hover:to-blue-600 active:scale-95 focus:ring-4 focus:ring-teal-300 focus:ring-opacity-50 transition"
+          >
+            Masuk →
+          </button>
+        </form>
+
+        <p class="text-center text-sm text-gray-500">
+          Belum punya akun?
+          <a
+            href="daftar.html"
+            class="text-blue-600 font-semibold hover:underline"
+            >Mendaftar</a
+          >
+        </p>
+      </section>
+    </main>
+
+    <script>
+      // Login dengan Google
+      function handleCredentialResponse(response) {
+        const data = jwt_decode(response.credential);
+        const nama = data.name || data.email.split("@")[0];
+        localStorage.setItem("loggedInUser", nama);
+        alert(`Hai ${nama}, login Google berhasil!`);
+        window.location.href = "index.html";
+      }
+
+      // Login manual
+      document
+        .getElementById("loginForm")
+        .addEventListener("submit", function (e) {
+          e.preventDefault();
+          const username = document.getElementById("username").value.trim();
+          const password = document.getElementById("password").value.trim();
+
+          // Validasi dummy
+          if (username && password) {
+            localStorage.setItem("loggedInUser", username);
+            alert(`Hai ${username}, login manual berhasil!`);
+            window.location.href = "index.html";
+          } else {
+            alert("Harap isi semua data.");
+          }
+        });
+    </script>
+  </body>
+</html>

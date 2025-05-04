@@ -1,0 +1,67 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap");
+body {
+  font-family: "Inter", sans-serif;
+  margin: 0;
+}
+
+#splash-screen.fade-out {
+  opacity: 0;
+  transform: scale(0.8);
+  pointer-events: none;
+}
+
+/* Hamburger icon lines */
+.hamburger-line {
+  transition: all 0.4s ease;
+  transform-origin: center;
+  height: 2px;
+  background-color: #000;
+  border-radius: 1px;
+}
+/* Transform hamburger to X */
+.hamburger.open .line1 {
+  transform: rotate(45deg) translate(5px, 5px);
+}
+.hamburger.open .line2 {
+  opacity: 0;
+}
+.hamburger.open .line3 {
+  transform: rotate(-45deg) translate(5px, -5px);
+}
+/* Slide-in menu from right */
+.menu {
+  transition: transform 0.4s ease;
+  transform: translateX(100%); /* Initially on the right side */
+}
+.menu.open {
+  transform: translateX(0); /* Slide in */
+}
+/* Prevent bottom navigation from being hidden */
+.main-container {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+.content {
+  flex-grow: 1;
+}
+/* Overlay style (optional, dim background) */
+#taskPanel {
+  bottom: 0;
+  padding-bottom: 6rem; /* Tambahkan ruang agar tidak menabrak tombol '+' */
+  max-height: calc(100vh - 5rem); /* Biar tidak nabrak bottom nav */
+  overflow-y: auto;
+}
+#overlay.active {
+  display: block;
+}
+/* Footer or Bottom Navigation */
+.bottom-nav {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-color: white;
+  box-shadow: 0 -2px 8px rgba(0, 0, 0, 0.1);
+  z-index: 10;
+}

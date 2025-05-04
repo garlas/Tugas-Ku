@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Daftar</title>
+
+    <!-- Tailwind -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Google Fonts & Icons -->
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
+      rel="stylesheet"
+    />
+
+    <!-- Google Sign-In -->
+    <script src="https://accounts.google.com/gsi/client" async defer></script>
+
+    <style>
+      body {
+        font-family: "Inter", sans-serif;
+      }
+    </style>
+  </head>
+
+  <body class="bg-gray-100">
+    <main class="min-h-screen flex items-center justify-center px-6 py-10">
+      <section
+        class="w-full max-w-md bg-white rounded-3xl shadow-lg p-8 sm:p-10 flex flex-col gap-6"
+      >
+        <!-- Google Sign-In -->
+        <div
+          id="g_id_onload"
+          data-client_id="1041271209039-lb0mlc80gktfp8b8vu2dird1k1aa0r73.apps.googleusercontent.com"
+          data-callback="handleCredentialResponse"
+          data-auto_prompt="false"
+        ></div>
+
+        <div
+          class="g_id_signin"
+          data-type="standard"
+          data-shape="rectangular"
+          data-theme="outline"
+          data-text="signin_with"
+          data-size="large"
+          data-logo_alignment="left"
+        ></div>
+
+        <div class="text-center text-sm text-gray-500">Atau daftar manual</div>
+
+        <!-- Manual Register/Login Form -->
+        <form id="formAuth" class="flex flex-col gap-5">
+          <div class="flex flex-col">
+            <label for="name" class="text-sm font-semibold text-gray-700 mb-1"
+              >Nama</label
+            >
+            <input
+              id="name"
+              type="text"
+              placeholder="Masukkan nama"
+              class="rounded-xl border border-gray-300 px-4 py-3 text-base text-gray-800 placeholder-gray-400 focus:ring-2 focus:ring-blue-400 focus:border-transparent"
+              required
+            />
+          </div>
+
+          <div class="flex flex-col">
+            <label for="email" class="text-sm font-semibold text-gray-700 mb-1"
+              >Email</label
+            >
+            <input
+              id="email"
+              type="email"
+              placeholder="Masukkan email"
+              class="rounded-xl border border-gray-300 px-4 py-3 text-base text-gray-800 placeholder-gray-400 focus:ring-2 focus:ring-blue-400 focus:border-transparent"
+              required
+            />
+          </div>
+
+          <div class="flex flex-col">
+            <label
+              for="password"
+              class="text-sm font-semibold text-gray-700 mb-1"
+              >Kata Sandi</label
+            >
+            <input
+              id="password"
+              type="password"
+              placeholder="Masukkan kata sandi"
+              class="rounded-xl border border-gray-300 px-4 py-3 text-base text-gray-800 placeholder-gray-400 focus:ring-2 focus:ring-blue-400 focus:border-transparent"
+              required
+            />
+          </div>
+
+          <button
+            type="submit"
+            class="mt-2 py-3 rounded-xl bg-gradient-to-r from-teal-400 to-blue-500 text-white font-semibold text-lg shadow-lg hover:from-teal-500 hover:to-blue-600 active:scale-95 focus:ring-4 focus:ring-teal-300 focus:ring-opacity-50 transition"
+          >
+            Daftar →
+          </button>
+        </form>
+
+        <p class="text-center text-sm text-gray-500">
+          Sudah punya akun?
+          <a
+            href="login.html"
+            class="text-blue-600 hover:underline font-semibold"
+          >
+            Silakan login kembali.
+          </a>
+        </p>
+      </section>
+    </main>
+
+    <script src="/js/daftar.js"></script>
+  </body>
+</html>

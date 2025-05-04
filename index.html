@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1" name="viewport" />
+    <title>Tugas-Ku</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+    />
+    <link rel="stylesheet" href="css/index.css" />
+  </head>
+
+  <body class="bg-white">
+    <!-- Splash Screen -->
+    <div
+      id="splash-screen"
+      class="fixed inset-0 bg-white flex items-center justify-center z-[9999] transition-all duration-700"
+    >
+      <img
+        src="logo.png"
+        alt="Logo"
+        class="w-32 h-32 transition-all duration-700"
+        id="splash-logo"
+      />
+    </div>
+
+    <div class="main-container">
+      <!-- Header with Hamburger Button -->
+      <header class="flex justify-between items-start p-4 relative z-30">
+        <div class="flex flex-col space-y-2">
+          <button
+            id="hamburgerBtn"
+            aria-label="Toggle menu"
+            aria-expanded="false"
+            class="hamburger flex flex-col justify-between w-6 h-5 cursor-pointer"
+            type="button"
+          >
+            <span class="hamburger-line line1 w-full"></span>
+            <span class="hamburger-line line2 w-full"></span>
+            <span class="hamburger-line line3 w-full"></span>
+          </button>
+        </div>
+      </header>
+
+      <!-- Display Greeting Based on User -->
+      <div class="flex flex-col items-start px-6 mt-4 space-y-1">
+        <span id="greeting" class="text-sm font-semibold text-gray-700">
+          Hey,
+        </span>
+        <h1 class="text-lg font-extrabold text-gray-900 tracking-wide mt-2">
+          Apa rencana mu?
+        </h1>
+      </div>
+
+      <!-- Slide-in menu from right -->
+      <nav
+        id="slideMenu"
+        class="menu fixed top-0 right-0 h-full w-48 bg-white shadow-lg border-l border-gray-200 p-6 flex flex-col space-y-6 text-xs font-semibold text-black leading-tight z-20"
+        aria-hidden="true"
+      >
+        <div
+          tabindex="0"
+          role="link"
+          class="cursor-pointer hover:text-teal-600 focus:text-teal-600 outline-none"
+        >
+          Edit
+        </div>
+        <div
+          tabindex="0"
+          role="link"
+          class="cursor-pointer hover:text-teal-600 focus:text-teal-600 outline-none"
+        >
+          Plan
+        </div>
+        <div
+          tabindex="0"
+          role="link"
+          class="cursor-pointer hover:text-teal-600 focus:text-teal-600 outline-none"
+        >
+          List
+        </div>
+      </nav>
+
+      <main
+        id="emptyMessage"
+        class="content flex flex-col items-center justify-center px-6"
+      >
+        <img
+          alt="Calendar icon with a check mark in a dark blue circle on top right and a plus sign in a purple circle on bottom left, all inside a light gray circular background"
+          class="mb-8"
+          height="120"
+          src="https://storage.googleapis.com/a1aa/image/7d090c0c-4232-469a-6c50-e18768b659ce.jpg"
+          width="120"
+        />
+        <p class="text-center font-semibold text-black text-sm leading-5 mb-2">
+          Anda belum merencanakan apa pun
+        </p>
+        <p
+          class="text-center text-gray-400 text-xs leading-4 max-w-[220px]"
+          id="signupText"
+        >
+          Belum punya akun?
+          <a
+            href="daftar.html"
+            class="text-blue-500 underline cursor-pointer"
+            id="daftarBtn"
+            >Daftar sekarang</a
+          >
+          untuk mulai membuat rencana tugas!
+        </p>
+      </main>
+
+      <!-- Riwayat tugas -->
+      <div id="taskHistory" class="px-6 mt-6 space-y-4 pb-24"></div>
+
+      <!-- Overlay hanya satu kali -->
+      <div
+        id="overlay"
+        class="hidden fixed inset-0 bg-black bg-opacity-50 z-30"
+      ></div>
+
+      <!-- Floating Form Panel -->
+      <div
+        id="taskPanel"
+        class="fixed bottom-0 left-0 right-0 bg-white shadow-2xl rounded-t-2xl p-6 transform translate-y-full transition-transform duration-500 z-40 max-w-md mx-auto"
+      >
+        <h2 class="text-lg font-semibold mb-4 text-center">Tambah Pengingat</h2>
+
+        <form id="taskForm" class="space-y-4">
+          <input
+            type="text"
+            id="titleInput"
+            placeholder="Judul tugas"
+            class="w-full border border-gray-300 p-2 rounded-md focus:outline-none focus:ring-2 focus:ring-teal-500"
+            required
+          />
+          <textarea
+            id="descInput"
+            placeholder="Deskripsi tugas"
+            class="w-full border border-gray-300 p-2 rounded-md focus:outline-none focus:ring-2 focus:ring-teal-500"
+            rows="3"
+          ></textarea>
+
+          <div>
+            <label class="text-sm font-medium block mb-1">Deadline</label>
+            <input
+              id="deadlineInput"
+              name="deadline"
+              type="datetime-local"
+              class="w-full border border-gray-300 p-2 rounded-md"
+              required
+            />
+          </div>
+
+          <div>
+            <label class="text-sm font-medium block mb-1"
+              >Ingatkan sebelum</label
+            >
+            <select
+              class="w-full border border-gray-300 p-2 rounded-md"
+              id="reminderInput"
+              required
+            >
+              <option value="0">Tidak usah</option>
+              <option value="1">1 jam sebelum</option>
+              <option value="3">3 jam sebelum</option>
+              <option value="24">1 hari sebelum</option>
+              <option value="48">2 hari sebelum</option>
+            </select>
+          </div>
+
+          <div class="flex items-center">
+            <input id="soundToggle" type="checkbox" class="mr-2" />
+            <label for="soundToggle" class="text-sm">
+              Aktifkan suara notifikasi
+            </label>
+          </div>
+
+          <button
+            type="submit"
+            class="w-full bg-teal-500 hover:bg-teal-600 text-white py-2 rounded-md"
+          >
+            Simpan
+          </button>
+        </form>
+
+        <!-- Feedback -->
+        <div
+          id="successAlert"
+          class="hidden mt-4 bg-green-100 text-green-700 p-3 rounded-md text-sm text-center"
+        >
+          Tugas berhasil disimpan!
+        </div>
+      </div>
+    </div>
+
+    <!-- Bottom Navigation (Fixed) -->
+    <nav
+      class="bottom-nav flex justify-between items-center px-6 py-4 border-t border-gray-200 bg-white shadow-lg fixed bottom-0 left-0 right-0 z-50"
+    >
+      <a
+        href="index.html"
+        class="nav-btn text-black transition-colors"
+        aria-label="Home"
+      >
+        <i class="fas fa-home fa-lg"></i>
+      </a>
+      <a
+        href="calendar.html"
+        class="nav-btn text-gray-400 transition-colors"
+        aria-label="Calendar"
+      >
+        <i class="far fa-calendar-alt fa-lg"></i>
+      </a>
+      <!-- Tombol Add / Close Floating Panel -->
+      <button
+        aria-label="Add"
+        id="plusButton"
+        class="bg-gradient-to-r from-cyan-400 to-teal-400 text-white rounded-full w-14 h-14 flex items-center justify-center shadow-lg -mt-10 transition-transform duration-300 relative overflow-hidden"
+      >
+        <!-- Ikon Plus -->
+        <i
+          id="plusIcon"
+          class="fas fa-circle-plus fa-xl absolute transition-all duration-300 ease-in-out scale-100"
+        ></i>
+
+        <!-- Ikon Close -->
+        <i
+          id="closeIcon"
+          class="fas fa-circle-xmark fa-xl absolute transition-all duration-300 ease-in-out opacity-0 scale-0"
+        ></i>
+      </button>
+
+      <a
+        href="notif.html"
+        class="nav-btn text-gray-400 transition-colors"
+        aria-label="Notifications"
+      >
+        <i class="far fa-bell fa-lg"></i>
+      </a>
+      <a
+        href="profile.html"
+        class="nav-btn text-gray-400 transition-colors"
+        aria-label="Profile"
+      >
+        <i class="far fa-user fa-lg"></i>
+      </a>
+    </nav>
+
+    <script src="js/index.js"></script>
+  </body>
+</html>
